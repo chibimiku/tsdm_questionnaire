@@ -1,0 +1,14 @@
+<!--{subtemplate common/header}-->
+ 
+<table>
+<thead><tr><td>ID</td><td>作者</td><td>问题数</td><td>回答数</td><td>过期时间</td><td>建立时间</td><td></td></tr></thead>
+<tbody>
+<!--{loop $paperlist $paper}-->
+	<tr>
+	<td>$paper[paperid]</td>
+	<td><a href="home.php?mod=space&uid=94&do=profile">$paper[author]</a></td>
+	<td>$paper[questionsnum]</td>
+	
+<!--{/loop}--> 
+</tbody></table>
+<!--{subtemplate common/footer}-->

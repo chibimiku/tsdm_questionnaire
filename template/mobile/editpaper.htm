@@ -1,0 +1,23 @@
+<!--{subtemplate common/header}-->
+ 
+<!--{loop $qslist $questions}-->
+<form action="plugin.php?id=tsdmquestionnaire:tsdmquestionnaire&action=submiteditpaper" method="post" onsubmit="ajax_submit_this(this);return false;">
+	<input type="hidden" name="formhash" value="$_G[formhash]" />
+	<input type="hidden" name="handlekey" value="recv_miku" />
+	<div class="box">
+		<h2>No. $question[questionid] $question[content]</h2>
+		<h3>问题描述</h3>
+		<input name="question_content" type="text" col="60" />
+		<h3>问题选项，用\t分割</h3>
+		<input name="question_options" type="text" col="60" />
+		<h3>问题类型，注意修改可能导致原有回答不匹配新问题</h3>
+		<select name="question_type">
+			<option value="0">填空</option>
+			<option value="1">单选</option>
+		</select>
+		<input name="tsdmquestionnaire_submit_$question[questid]" type="submit" />
+	</div>
+</form>
+<!--{/loop}--> 
+ 
+<!--{subtemplate common/footer}-->

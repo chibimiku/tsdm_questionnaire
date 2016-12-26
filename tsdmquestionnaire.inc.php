@@ -9,8 +9,17 @@
 if(!defined('IN_DISCUZ')) {
 		exit('Access Denied');
 }
+
+//question type:
+//0	Ìî¿Õ
+//1	µ¥Ñ¡
+
 //var_dump($_G['isHTTPS']);
 switch ($_G['gp_action']){
+	case 'paperlist':
+		$paperlist = DB::result_array('SELECT * FROM '.DB::table('plugin_questionnaire_index'." ORDER BY createtime DESC");
+		include template("tsdmquestionnaire:paperlist");
+		break;
 	case 'showpaper':
 		$paperid = intval($_G['gp_paperid']);
 		$myans = DB::result_array('SELECT * FROM '.DB::table('plugin_questionnaire_answers')." WHERE paperid=$paperid AND authorid=$_G[uid]");
@@ -20,8 +29,6 @@ switch ($_G['gp_action']){
 			$myansindex[$row['questid']] = $row['choices'];
 			$myanstextindex[$row['questid']] = $row['content'];
 		}
-		
-		//var_dump($myansindex);
 		$qslist = DB::result_array('SELECT * FROM '.DB::table('plugin_questionnaire_questions')." WHERE paperid=$paperid");
 		$qscount = 0;
 		foreach($qslist as &$row){
@@ -32,7 +39,24 @@ switch ($_G['gp_action']){
 		include template("tsdmquestionnaire:tsdmquestionnaire");
 		break;
 	case 'editpaper':
-		
+		$paperid = intval($_G['gp_paperid']);
+		$paperinfo = DB::fetch_first('SELECT * FROM '.DB::table('plugin_questionnaire_index')." WHERE paperid=$paperid");
+		if(!$paperinfo){
+			showmessage('err_paperid_illegal');
+		}
+		$questions = DB::result_array('SELECT * FROM'.DB::table('plugin_questionnaire_questions')." WHERE paperid=$paperid");
+		include template("tsdmquestionnaire:editpaper");
+		break;
+	case 'submiteditpaper':
+		$_G['inajax'] = true;
+		$questid = intval($_G['gp_questid']);
+		DB::update('plugin_questionnaire_questions', array(
+			'content' => $_G['gp_content'],
+			'type' => intval($_G['gp_type]'),
+			'options' => $_G['options'],
+		),"questid=$questid");
+		$returnarray['message'] = 'succ_editpaper_submit_good';
+		echo json_encode($returnarray);
 		break;
 	case 'submitanswer':
 		$_G['inajax'] = true;
