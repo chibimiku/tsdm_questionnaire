@@ -1,0 +1,64 @@
+{template common/header}
+<div id="pt" class="bm cl">
+	<div class="z">
+		<a href="./" id="fjump" class="nvhm">$_G[setting][bbname]</a><EM></EM><a href="plugin.php?id=tsdmrate">天使动漫批量评分系统</a>
+	</div>
+</div>
+	    <div id="ct" class="ct2_a wp cl">
+	      <div id="ct_shell">
+	        批量评分
+            <form method="post" action="$phpself&tid=$_G['gp_tid']"><input type="hidden" name="formhash" value="{FORMHASH}" />
+            <table width="85%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="30%">用户：</td>
+    <td width="70%">$_G[username]</td>
+  </tr>
+  <tr>
+    <td>标题：</td>
+    <td>楼层总数:$postcount</td>
+  </tr>
+  <tr>
+    <td>评分：</td>
+    <td>评分分值：<input name="score" type="text" size="8">评分类型：<select name="extcreditsID" class="ps">
+                                <option value="1" selected="selected">威望</option>
+                                <option value="2">天使币</option>
+                                <!--{if $_G['member']['groupid'] == 1 || $_G['member']['groupid'] == 2 || $_G['member']['groupid'] == 23}--><option value="3">宣传度</option><!--{/if}-->
+                                <option value="4">天然</option>
+                                <option value="5">腹黑</option>
+								<option value="7">枫叶</option>
+                                </select></td>
+  </tr>
+  <tr>
+    <td>设定连续评分范围：</td>
+    <td><p>起始楼#<input name="rateRange1" type="text" size="6" value="1">终止楼#<input name="rateRange2" type="text" size="6" value="$postcount"></p>
+      <p>其中不加分的楼层#用逗号分开<br />例：1,2,5,7<br /><input name="passRate" type="text" size="40"></p></td>
+  </tr>
+  <tr>
+    <td>手动指定楼层【非空时连续评分栏失效】<br />用逗号分开<br />例：1,2,5,7<br /></td>
+    <td><textarea name="specialRate" cols="90" rows="5" id="floor"></textarea></td>
+  </tr>
+  <tr>
+    <td>评分原因</td>
+    <td>
+      <textarea name="rateReason" cols="90" rows="8" id="rateReson"></textarea></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><input name="sendPM" value="1" type="checkbox" id="sendPM" checked="checked" />
+      <label for="sendPM">发短消息通知作者</label></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><input type="checkbox" name="passSame" id="passSame" value="1" />
+      <label for="passSame">是否过滤重复回贴(对重复回贴者只评分一次)</label></td>
+  </tr>
+  <tr>
+    <td colspan="2"><input type="submit" name="ratesubmit" id="submit" value="确定进行批量评分"></td>
+    </tr>
+            </table>
+
+            </form>
+	        
+	      </div>
+	    </div>
+{template common/footer}

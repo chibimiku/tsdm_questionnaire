@@ -1,0 +1,47 @@
+ <!--{subtemplate common/header}-->
+ 
+<!--{loop $qslist $question}-->
+<form action="plugin.php?id=tsdmquestionnaire:tsdmquestionnaire&action=submitanswer" method="post" onsubmit="ajax_submit_this(this);return false;">
+<input type="hidden" name="formhash" value="$_G[formhash]" />
+<input type="hidden" name="handlekey" value="recv_miku">
+<input type="hidden" name="paperid" value="$paperid" />
+<input type="hidden" name="questid" value="$question[questid]" />
+<div class="box">
+	<h2>No. $question[order] $question[content]</h2>
+	<!--{if ($question[type] == 1)}-->
+		<!--{loop $question[optarr] $optindex $optcontent}-->
+			<input type="radio" name="choices" value="$optindex" <!--{if $myansindex[$question[questid]]==$optindex}-->checked<!--{/if}-->/><span>$optcontent</span><br />
+		<!--{/loop}-->		
+	<!--{elseif ($question[type] == 0)}-->
+		<input type="text" name="optcontent" col="40" value="$myanstextindex[$question[questid]]" autocomplete="off"/>
+		<input type="hidden" name="choices" value="0" />
+	<!--{/if}-->
+	<label for="tsdmquestionnaire_submit_$question[questid]">Temp</label><input name="tsdmquestionnaire_submit_$question[questid]" type="submit" />
+</div>
+</form>
+<!--{/loop}-->
+ 
+ <script>
+function ajax_submit_this(form){
+	ajax({
+	url: 'plugin.php?id=tsdmquestionnaire:tsdmquestionnaire&action=submitanswer',
+	type: 'POST',
+	data: serialize(form),
+	dataType: 'string',
+	success: function (response, xml) {
+	var tstgrs = JSON.parse(response);
+	if(tstgrs.status == 0) {
+		console.log('done');
+	}else{
+		//tnote.innerHTML = "TAG投票失败，可能已投票";
+		console.log('gg');
+	}
+	},
+	fail: function (status) {
+		console.log('oops');
+	}
+	});
+}
+ </script>
+ 
+ <!--{subtemplate common/footer}-->
