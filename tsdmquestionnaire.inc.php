@@ -52,7 +52,7 @@ switch ($_G['gp_action']){
 		$questid = intval($_G['gp_questid']);
 		DB::update('plugin_questionnaire_questions', array(
 			'content' => $_G['gp_content'],
-			'type' => intval($_G['gp_type]'),
+			'type' => intval($_G['gp_type']),
 			'options' => $_G['options'],
 		),"questid=$questid");
 		$returnarray['message'] = 'succ_editpaper_submit_good';
