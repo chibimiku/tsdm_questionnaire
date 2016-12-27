@@ -17,7 +17,7 @@ if(!defined('IN_DISCUZ')) {
 //var_dump($_G['isHTTPS']);
 switch ($_G['gp_action']){
 	case 'paperlist':
-		$paperlist = DB::result_array('SELECT * FROM '.DB::table('plugin_questionnaire_index'." ORDER BY createtime DESC");
+		$paperlist = DB::result_array('SELECT * FROM '.DB::table('plugin_questionnaire_index'." ORDER BY createtime DESC"));
 		include template("tsdmquestionnaire:paperlist");
 		break;
 	case 'showpaper':
