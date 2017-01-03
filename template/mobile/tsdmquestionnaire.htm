@@ -1,4 +1,9 @@
- <!--{subtemplate common/header}-->
+<!--{subtemplate common/header}-->
+
+<style>#update_tip_box{position: absolute;top:10px;right:10px;transition:opacity 2s;opacity:0;}</style>
+<aside id="update_tip_box">
+	<p id="update_tip">Here is update tips.</p>
+</aside>
  
 <h1 class="email-content-title">$paperinfo[name]</h1>
 <p class="email-content-subtitle">
@@ -37,6 +42,7 @@ function ajax_submit_this(form){
 	var tstgrs = JSON.parse(response);
 	if(tstgrs.status == 0) {
 		console.log('done');
+		tip_show(5000);
 	}else{
 		//tnote.innerHTML = "TAG投票失败，可能已投票";
 		console.log('gg');
@@ -46,6 +52,19 @@ function ajax_submit_this(form){
 		console.log('oops');
 	}
 	});
+}
+
+function tip_show(mytimeout, message){
+	msgel1 = document.getElementById('update_tip');
+	msgel1.innerHTML = message;
+	el1 = document.getElementById('update_tip_box');
+	el1.style.opacity = 1;
+	setTimeout(function(){
+		msgel2 = document.getElementById('update_tip');
+		msgel2.innerHTML = "";
+		el2 = document.getElementById('update_tip_box');
+		el2.style.opacity = 1;
+	}, mytimeout);
 }
  </script>
  
