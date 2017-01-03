@@ -10,6 +10,8 @@ if(!defined('IN_DISCUZ')) {
 		exit('Access Denied');
 }
 
+define('PURECSS', true);
+
 //question type:
 //0	Ìî¿Õ
 //1	µ¥Ñ¡

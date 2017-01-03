@@ -1,13 +1,13 @@
  <!--{subtemplate common/header}-->
  
 <!--{loop $qslist $question}-->
-<form action="plugin.php?id=tsdmquestionnaire:tsdmquestionnaire&action=submitanswer" method="post" onsubmit="ajax_submit_this(this);return false;">
+<form class="pure-form pure-form-stacked" action="plugin.php?id=tsdmquestionnaire:tsdmquestionnaire&action=submitanswer" method="post" onsubmit="ajax_submit_this(this);return false;">
 	<input type="hidden" name="formhash" value="$_G[formhash]" />
 	<input type="hidden" name="handlekey" value="recv_miku" />
 	<input type="hidden" name="paperid" value="$paperid" />
 	<input type="hidden" name="questid" value="$question[questid]" />
 	<div class="box">
-		<h2>No. $question[order] $question[content]</h2>
+		<label for="choices">No. $question[order] $question[content]</label>
 		<!--{if ($question[type] == 1)}-->
 			<!--{loop $question[optarr] $optindex $optcontent}-->
 				<input type="radio" name="choices" value="$optindex" <!--{if $myansindex[$question[questid]]==$optindex}-->checked<!--{/if}-->/><span>$optcontent</span><br />
