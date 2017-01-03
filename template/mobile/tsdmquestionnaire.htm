@@ -1,6 +1,6 @@
 <!--{subtemplate common/header}-->
 
-<style>#update_tip_box{position: absolute;top:10px;right:10px;transition:opacity 2s;opacity:0;}</style>
+<style>#update_tip_box{position: absolute;top:10px;right:10px;transition:opacity 2s;opacity:0;background: #1f8dd6 none repeat scroll 0 0;border-radius: 3px;padding: 0.3em 1em;box-sizing: border-box;line-height: 1.6;}</style>
 <aside id="update_tip_box">
 	<p id="update_tip">Here is update tips.</p>
 </aside>
@@ -63,7 +63,7 @@ function tip_show(mytimeout, message){
 		msgel2 = document.getElementById('update_tip');
 		msgel2.innerHTML = "";
 		el2 = document.getElementById('update_tip_box');
-		el2.style.opacity = 1;
+		el2.style.opacity = 0;
 	}, mytimeout);
 }
  </script>
