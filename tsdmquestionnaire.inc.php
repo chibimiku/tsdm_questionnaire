@@ -17,6 +17,11 @@ define('PURECSS', true);
 //1	ตฅัก
 
 //var_dump($_G['isHTTPS']);
+
+if(!isset($_G['gp_action']){
+	$_G['gp_action'] = 'paperlist';
+}
+
 switch ($_G['gp_action']){
 	case 'paperlist':
 		$paperlist = DB::result_array('SELECT * FROM '.DB::table('plugin_questionnaire_index'." ORDER BY createtime DESC"));
@@ -24,6 +29,8 @@ switch ($_G['gp_action']){
 		break;
 	case 'showpaper':
 		$paperid = intval($_G['gp_paperid']);
+		$paperinfo = DB::fetch_first('SELECT * FROM '.DB::table('plugin_questionnaire_index')." WHERE paperid=$paperid");
+		$paperinfo['createtimetext'] = date('Y-m-d H:i:s',$paperinfo['createtimetext'])
 		$myans = DB::result_array('SELECT * FROM '.DB::table('plugin_questionnaire_answers')." WHERE paperid=$paperid AND authorid=$_G[uid]");
 		$myansindex = array();
 		$myanstextindex = array();
