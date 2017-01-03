@@ -42,14 +42,14 @@ function ajax_submit_this(form){
 	var tstgrs = JSON.parse(response);
 	if(tstgrs.status == 0) {
 		console.log('done');
-		tip_show(5000);
+		tip_show(5000, 'post updated...');
 	}else{
-		//tnote.innerHTML = "TAG投票失败，可能已投票";
 		console.log('gg');
+		tip_show(5000, 'error when post... ,message is: ' + tstgrs.message);
 	}
 	},
 	fail: function (status) {
-		console.log('oops');
+		console.log('oops. submit failed. status is: ' + status);
 	}
 	});
 }

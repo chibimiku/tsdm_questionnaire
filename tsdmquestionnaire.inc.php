@@ -79,6 +79,10 @@ switch ($_G['gp_action']){
 		}
 		$optcontent = $_G['gp_optcontent'];
 		if(!$paperid || !$questid || (!$mychoice && !$optcontent)){
+			$returnarray['paperid'] = $paperid;
+			$returnarray['questid'] = $questid;
+			$returnarray['mychoice'] = $mychoice;
+			$returnarray['optcontent'] = urlencode($optcontent);
 			$returnarray['status'] = -1;
 			$returnarray['message'] = 'err_illegal_submit';
 			echo json_encode($returnarray);
